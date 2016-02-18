@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_id": "locus-281b",
+    "project_number": "1033737359741",
+    "name": "Locus"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033737359741:android:adc90f3efdbc4dfe",
+        "client_id": "android:sara.locus",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "sara.locus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1033737359741-4tl98l3auq17rhi9cp5nharu2h7j4tij.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "sara.locus",
+            "certificate_hash": "247B61392E2A34254EFF713E40994070D251B03A"
+          }
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
