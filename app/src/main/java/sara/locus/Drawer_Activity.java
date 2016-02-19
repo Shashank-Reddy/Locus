@@ -43,14 +43,14 @@ public class Drawer_Activity extends AppCompatActivity
 
         TextView EmailTextView = (TextView) findViewById(R.id.EmailTextView);
         EmailTextView.setText(email);
-
+        // Calling map_fragment from main(Drawer) activity
         Map_Fragment mf=new Map_Fragment(); //create the fragment instance for the map fragment
         FragmentManager manager=getSupportFragmentManager();//create an instance of fragment manager
-
         FragmentTransaction transaction=manager.beginTransaction();//create an instance of Fragment-transaction
-
-        transaction.add(R.id.map, mf, "Map_Fragment");
+        transaction.add(R.id.map,mf, "Map_Fragment");
         transaction.commit();
+
+        //
 
         String caller = getIntent().getStringExtra("caller");
         try {
