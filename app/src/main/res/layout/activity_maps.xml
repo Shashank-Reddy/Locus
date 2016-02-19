@@ -13,6 +13,8 @@
     android:layout_height="300dp" android:id="@+id/map"
     tools:context="sara.locus.MapsActivity"
     android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+
 </RelativeLayout>
     <!-- The navigation drawer -->
     <TableLayout android:id="@+id/left_drawer"
@@ -53,9 +55,23 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
                 android:paddingBottom="16dp"
-                android:textColor="#ffffff"/>
+                android:textColor="#ffffff"
+                />
+
         </TableRow>
 
+        <Button
+
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Log out"
+            android:id="@+id/logOutButton"
+
+            android:layout_marginBottom="10dp"
+            android:drawableLeft="@android:drawable/ic_menu_delete"
+            android:onClick="logOut"/>
     </TableLayout>
+
+
 
 </android.support.v4.widget.DrawerLayout>

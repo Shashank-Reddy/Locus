@@ -5,7 +5,8 @@
     <string name="password">Password</string>
     <string name="logintext">Use your Google plus account to login</string>
     <string name="login">Log In</string>
-    <string name="loginSuccessMessage">Successfully Signed In as</string>
+    <string name="loginSuccessMessage">"Successfully Signed In as "</string>
+    <string name="loginFailMessage">Login Failed :(</string>
     <string name="title_activity_map_">Map_Activity</string>
 
     <string name="hello_world">Hello world!</string>

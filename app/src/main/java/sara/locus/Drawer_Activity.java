@@ -2,14 +2,20 @@ package sara.locus;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.squareup.picasso.Picasso;
 
 
@@ -43,10 +49,55 @@ public class Drawer_Activity extends AppCompatActivity
 
         FragmentTransaction transaction=manager.beginTransaction();//create an instance of Fragment-transaction
 
-        transaction.add(R.id.map,mf, "Map_Fragment");
+        transaction.add(R.id.map, mf, "Map_Fragment");
         transaction.commit();
+
+        String caller = getIntent().getStringExtra("caller");
+        try {
+            Class callerClass = Class.forName(caller);
+        }
+        catch (Exception e) {
+            e.getStackTrace();
+        }
 
 
     }
+
+    public void logOut(View view) {
+        // delete sharedPReferences
+        SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        String name = sharedPreferences.getString("name", null);
+        String byeText = "Goodbye, "+name;
+        Toast toast = Toast.makeText(getApplicationContext(),
+                byeText,
+                Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.BOTTOM, 0, 10);
+        toast.show();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+
+        Intent i = new Intent(getApplicationContext(),Login_Activity.class);
+        startActivity(i);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        String caller = getIntent().getStringExtra("caller");
+        try {
+            Class callerClass = Class.forName(caller);
+        }
+        catch (Exception e) {
+            e.getStackTrace();
+        }
+        if (caller == "Login_Activity") {
+
+        }
+        else {
+            moveTaskToBack(true);
+        }
+    }
+
 
 }

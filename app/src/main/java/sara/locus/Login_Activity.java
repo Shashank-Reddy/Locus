@@ -136,14 +136,16 @@ public class Login_Activity extends AppCompatActivity implements
             //passing user info ends
 
             Intent i = new Intent(getApplicationContext(),Drawer_Activity.class);
+            i.putExtra("caller", "Login_Activity");
             startActivity(i);
 
         } else {
 
-            TextView displayfail = (TextView) findViewById(R.id.logintext);
-            displayfail.setText("Sign in failed");
-            // Signed out, show unauthenticated UI.
-            //updateUI(false);
+            Toast toast = Toast.makeText(getApplicationContext(),
+                    getString(R.string.loginFailMessage),
+                    Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.BOTTOM, 0, 10);
+            toast.show();
         }
     }
 
@@ -152,5 +154,9 @@ public class Login_Activity extends AppCompatActivity implements
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
+    }
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }

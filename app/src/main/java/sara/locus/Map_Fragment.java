@@ -40,7 +40,7 @@ public class Map_Fragment extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap map) {
         // Add a marker in kmit and move the camera.
         LatLng kmit = new LatLng(17.397129,78.490193);
-        map.addMarker(new MarkerOptions().position(kmit).title("Marker in kmit"));
+        map.addMarker(new MarkerOptions().position(kmit).title("YOU ARE HERE"));
         map.moveCamera(CameraUpdateFactory.newLatLng(kmit));
         map.animateCamera(CameraUpdateFactory.zoomTo(15));
 
