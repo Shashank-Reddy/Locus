@@ -12,6 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +23,8 @@ import com.squareup.picasso.Picasso;
 
 public class Drawer_Activity extends AppCompatActivity
 {
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,5 +103,26 @@ public class Drawer_Activity extends AppCompatActivity
         }
     }
 
+    public void sendToServer(View view)
+    {
+        EditText getDistance = (EditText) findViewById(R.id.enterDistance);
+       // String fDistance=getDistance.getText().toString();
+        int fDistance=Integer.parseInt(getDistance.getText().toString());
+
+        EditText getBudget = (EditText) findViewById(R.id.enterBudget);
+        int fBudget=Integer.parseInt(getBudget.getText().toString());
+
+        EditText getHeadCount = (EditText) findViewById(R.id.enterHeadCount);
+        int fHeadCount=Integer.parseInt(getHeadCount.getText().toString());
+
+        Toast toast = Toast.makeText(getApplicationContext(),
+                getString(fDistance),
+                Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.BOTTOM, 0, 10);
+        toast.show();
+
+        Intent i = new Intent(getApplicationContext(),Drawer_Activity.class);
+        startActivity(i);
+    }
 
 }

@@ -11,4 +11,8 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_maps">Locus</string>
+    <string name="Tag_Line">Locate. Curate. Suggest</string>
+    <string name="Distance">Distance</string>
+    <string name="Budget">Budget</string>
+    <string name="Head_Count">Head count</string>
 </resources>
