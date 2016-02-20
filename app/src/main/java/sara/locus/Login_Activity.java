@@ -1,5 +1,6 @@
 package sara.locus;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,6 +31,8 @@ public class Login_Activity extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;  // Google sign in button code
     private static final int RC_SIGN_IN = 9001;  // Google sign in button code
     private static final String TAG = "SignInActivity";  // Google sign in button code
+    private int progressBarStatus = 0;
+    private  ProgressDialog progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +88,14 @@ public class Login_Activity extends AppCompatActivity implements
         switch (v.getId()) {
             case R.id.sign_in_button:
                 signIn();
+                progressBar = new ProgressDialog(v.getContext());
+                progressBar.setCancelable(true);
+                progressBar.setMessage("signing in");
+                progressBar.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressBar.setProgress(0);
+                progressBar.setMax(100);
+                progressBar.show();
+                progressBarStatus = 0;
                 break;
         }
         // ~Google sign in button code
@@ -124,13 +135,17 @@ public class Login_Activity extends AppCompatActivity implements
 
             String personEmail = acct.getEmail();
             //String personID = acct.getId();
-            Uri personPhotoURI = acct.getPhotoUrl();
 
             SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("isLoggedIn", true);
             editor.putString("email", personEmail);
             editor.putString("name", personName);
-            editor.putString("photoURI", personPhotoURI.toString());
+            if (acct.getPhotoUrl() != null) {
+                Uri personPhotoURI = acct.getPhotoUrl();
+                editor.putString("photoURI", personPhotoURI.toString());
+                Log.d(TAG, personPhotoURI.toString());
+            }
 
             editor.apply();
             //passing user info ends

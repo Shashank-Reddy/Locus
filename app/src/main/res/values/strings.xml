@@ -8,10 +8,13 @@
     <string name="loginSuccessMessage">"Successfully Signed In as "</string>
     <string name="loginFailMessage">Login Failed :(</string>
     <string name="title_activity_map_">Map_Activity</string>
+    <string name="dialog_log_out">Are you sure?</string>
+    <string name="logout">Log Out</string>
+    <string name="cancel">Cancel</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_maps">Locus</string>
-    <string name="Tag_Line">Locate. Curate. Suggest</string>
+    <string name="Tag_Line">Locate. Curate. Suggest.</string>
     <string name="Distance">Distance</string>
     <string name="Budget">Budget</string>
     <string name="Head_Count">Head count</string>
