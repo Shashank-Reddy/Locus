@@ -1,17 +1,4 @@
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="16dp"
-        android:src="@android:drawable/ic_menu_sort_by_size" />
-
-    <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
@@ -20,7 +7,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#607D8B">
+    android:background="@color/colorAccent">
     <!-- Main content view-->
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
@@ -28,93 +15,84 @@
     tools:context="sara.locus.Map_Fragment"
     android:name="com.google.android.gms.maps.SupportMapFragment" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/Distance"
-        android:id="@+id/Distance"
-        android:textColor="#ffffff"
-        android:layout_marginTop="51dp"
-        android:layout_below="@+id/map"
-        android:padding="8dp"
-     />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/Budget"
-        android:id="@+id/Budget"
-        android:textColor="#ffffff"
-        android:layout_below="@+id/Distance"
-        android:padding="8dp"
-
-         />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/Head_Count"
-        android:id="@+id/Head_Count"
-        android:textColor="#ffffff"
-        android:layout_below="@+id/Budget"
-        android:padding="8dp"/>
-
-    <EditText
-        android:layout_marginRight="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/enterDistance"
-        android:layout_above="@+id/enterBudget"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textColor="#ffffff" />
-
-    <EditText
-        android:layout_marginRight="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/enterBudget"
-        android:layout_below="@+id/Distance"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textColor="#ffffff" />
-
-    <EditText
-        android:layout_marginRight="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/enterHeadCount"
-        android:layout_below="@+id/enterBudget"
-        android:layout_alignLeft="@+id/enterBudget"
-        android:layout_alignStart="@+id/enterBudget"
-        android:textColor="#ffffff" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Apply Filters"
-        android:id="@+id/filter_Button"
-        android:layout_below="@+id/enterHeadCount"
-        android:layout_centerHorizontal="true"
-        android:onClick="sendToServer"/>
-
-    <!--<fragment  xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--xmlns:tools="http://schemas.android.com/tools"-->
-        <!--android:id="@+id/filter_layout"-->
-        <!--android:layout_width="match_parent"-->
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
-        <!--android:layout_above="@+id/map">-->
-    <!--</fragment>-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="@string/Distance"-->
+        <!--android:id="@+id/Distance"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:layout_marginTop="51dp"-->
+        <!--android:layout_below="@+id/map"-->
+        <!--android:padding="8dp"-->
+     <!--/>-->
 
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="@string/Budget"-->
+        <!--android:id="@+id/Budget"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:layout_below="@+id/Distance"-->
+        <!--android:padding="8dp"-->
+
+         <!--/>-->
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="@string/Head_Count"-->
+        <!--android:id="@+id/Head_Count"-->
+        <!--android:textColor="#ffffff"-->
+        <!--android:layout_below="@+id/Budget"-->
+        <!--android:padding="8dp"/>-->
+
+    <!--<EditText-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="number"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/enterDistance"-->
+        <!--android:layout_above="@+id/enterBudget"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:textColor="#ffffff" />-->
+
+    <!--<EditText-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="number"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/enterBudget"-->
+        <!--android:layout_below="@+id/Distance"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:textColor="#ffffff" />-->
+
+    <!--<EditText-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:inputType="number"-->
+        <!--android:ems="10"-->
+        <!--android:id="@+id/enterHeadCount"-->
+        <!--android:layout_below="@+id/enterBudget"-->
+        <!--android:layout_alignLeft="@+id/enterBudget"-->
+        <!--android:layout_alignStart="@+id/enterBudget"-->
+        <!--android:textColor="#ffffff" />-->
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Apply Filters"-->
+        <!--android:id="@+id/filter_Button"-->
+        <!--android:layout_below="@+id/enterHeadCount"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:onClick="sendToServer"/>-->
 
 
 </RelativeLayout>
@@ -126,9 +104,9 @@
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"
-        android:background="#607D8B"
+        android:background="@color/colorAccent"
         tools:context="sara.locus.Drawer_Activity">
-        <TableRow android:background="#3F51B5">
+        <TableRow android:background="@color/colorPrimary">
             <ImageView
                 android:id="@+id/userPhotoImageView"
                 android:layout_width="wrap_content"
@@ -139,7 +117,7 @@
 
          />
         </TableRow>
-        <TableRow android:background="#3F51B5">
+        <TableRow android:background="@color/colorPrimary">
          <TextView
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
@@ -150,7 +128,7 @@
 
              android:textColor="#ffffff"/>
         </TableRow>
-        <TableRow android:background="#3F51B5">
+        <TableRow android:background="@color/colorPrimary">
             <TextView
                 android:id="@+id/EmailTextView"
                 android:layout_width="match_parent"
@@ -180,7 +158,4 @@
             android:onClick="logOut"/>
     </TableLayout>
 
-
-
 </android.support.v4.widget.DrawerLayout>
-</android.support.design.widget.CoordinatorLayout>

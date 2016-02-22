@@ -56,14 +56,12 @@ public class Drawer_Activity extends AppCompatActivity
         TextView EmailTextView = (TextView) findViewById(R.id.EmailTextView);
         EmailTextView.setText(email);
 
-
         // Calling map_fragment from main(Drawer) activity
         Map_Fragment mf=new Map_Fragment(); //create the fragment instance for the map fragment
         FragmentManager manager=getSupportFragmentManager();//create an instance of fragment manager
         FragmentTransaction transaction=manager.beginTransaction();//create an instance of Fragment-transaction
         transaction.add(R.id.map,mf, "Map_Fragment");
         transaction.commit();
-
         //
 
         String caller = getIntent().getStringExtra("caller");
@@ -79,7 +77,7 @@ public class Drawer_Activity extends AppCompatActivity
 
     public void logOut(View view) {
         new AlertDialog.Builder(Drawer_Activity.this)
-                .setTitle("Log Out")
+                .setTitle("\t\t\t\t\tLog Out")
                 .setMessage(R.string.dialog_log_out)
                 .setPositiveButton(R.string.logout, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -128,26 +126,26 @@ public class Drawer_Activity extends AppCompatActivity
         }
     }
 
-    public void sendToServer(View view)
-    {
-        EditText getDistance = (EditText) findViewById(R.id.enterDistance);
-       // String fDistance=getDistance.getText().toString();
-        int fDistance=Integer.parseInt(getDistance.getText().toString());
-
-        EditText getBudget = (EditText) findViewById(R.id.enterBudget);
-        int fBudget=Integer.parseInt(getBudget.getText().toString());
-
-        EditText getHeadCount = (EditText) findViewById(R.id.enterHeadCount);
-        int fHeadCount=Integer.parseInt(getHeadCount.getText().toString());
-
-        Toast toast = Toast.makeText(getApplicationContext(),
-                getString(fDistance),
-                Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.BOTTOM, 0, 10);
-        toast.show();
-
-        Intent i = new Intent(getApplicationContext(),Drawer_Activity.class);
-        startActivity(i);
-    }
+//    public void sendToServer(View view)
+//    {
+//        EditText getDistance = (EditText) findViewById(R.id.enterDistance);
+//       // String fDistance=getDistance.getText().toString();
+//        int fDistance=Integer.parseInt(getDistance.getText().toString());
+//
+//        EditText getBudget = (EditText) findViewById(R.id.enterBudget);
+//        int fBudget=Integer.parseInt(getBudget.getText().toString());
+//
+//        EditText getHeadCount = (EditText) findViewById(R.id.enterHeadCount);
+//        int fHeadCount=Integer.parseInt(getHeadCount.getText().toString());
+//
+//        Toast toast = Toast.makeText(getApplicationContext(),
+//                getString(fDistance),
+//                Toast.LENGTH_LONG);
+//        toast.setGravity(Gravity.BOTTOM, 0, 10);
+//        toast.show();
+//
+//        Intent i = new Intent(getApplicationContext(),Drawer_Activity.class);
+//        startActivity(i);
+//    }
 
 }

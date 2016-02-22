@@ -1,14 +1,24 @@
 package sara.locus;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Toast;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.LocationSource;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -16,14 +26,14 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
+import java.security.Permission;
+import java.security.Permissions;
+
 /*
 ConnectionCallbacks and OnConnectionFailedListener are designed to monitor the state of the GoogleApiClient,
 which is used in this application for getting the user's current location.
-
 OnInfoWindowClickListener is triggered when the user clicks on the info window that pops up over a marker on the map.
-
 OnMapLongClickListener and OnMapClickListener are triggered when the user either taps or holds down on a portion of the map.
-
 OnMarkerClickListener is called when the user clicks on a marker on the map,
 which typically also displays the info window for that marker.
  */
@@ -34,9 +44,12 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
         GoogleMap.OnInfoWindowClickListener,
         GoogleMap.OnMapLongClickListener,
         GoogleMap.OnMapClickListener,
-        GoogleMap.OnMarkerClickListener
+        GoogleMap.OnMarkerClickListener,LocationSource.OnLocationChangedListener
 {
-
+    public Map_Fragment()
+    {
+        //constructor
+    }
     private GoogleApiClient mGoogleApiClient;
     private Location mCurrentLocation;
     private final int[] MAP_TYPES = { GoogleMap.MAP_TYPE_SATELLITE,
@@ -65,7 +78,6 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
                 .addOnConnectionFailedListener( this )
                 .addApi( LocationServices.API )
                 .build();
-
         initListeners();
     }
     /*
@@ -76,7 +88,7 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
     private void initListeners() {
         getMap().setOnMarkerClickListener(this);
         getMap().setOnMapLongClickListener(this);
-        getMap().setOnInfoWindowClickListener( this );
+        getMap().setOnInfoWindowClickListener(this);
         getMap().setOnMapClickListener(this);
     }
 
@@ -100,9 +112,22 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
 
         mCurrentLocation = LocationServices
                 .FusedLocationApi
-                .getLastLocation( mGoogleApiClient );
-
-        initCamera(mCurrentLocation);
+                .getLastLocation( mGoogleApiClient ); //mCurrentLocation returning null
+        if(mCurrentLocation!=null)
+        {
+            initCamera(mCurrentLocation);
+        }
+        else
+        {
+            //handle by requesting the users location from GPS client
+            Toast toast = Toast.makeText(getContext(),
+                    "Accessing GPS location",
+                    Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.BOTTOM, 0, 10);
+            toast.show();
+            location_alternate();
+           //Control is returned to this point successfully
+        }
 
     }
 
@@ -136,6 +161,10 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
         return false;
     }
 
+    @Override
+    public void onLocationChanged(final Location location) {
+        //mCurrentLocation = location; //This ain't helping to update the mCurrentLocation
+    }
 
    //Method used in onConnected
     private void initCamera( Location location ) {
@@ -160,4 +189,55 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
         Android reference documentation.
         */
     }
+
+    //
+    public void location_alternate()
+    {
+        // Acquire a reference to the system Location Manager
+        LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+
+        // Define a listener that responds to location updates
+        LocationListener locationListener = new LocationListener()
+        {
+            public void onLocationChanged(Location location) {
+                // Called when a new location is found by the network location provider.
+               // mCurrentLocation=location; //This ain't helping to update the mCurrentLocation
+            }
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
+
+            public void onProviderEnabled(String provider) {}
+
+            public void onProviderDisabled(String provider) {}
+        };
+
+        //end of listener
+
+
+        // Asking for location permissions at Run Time, because Android 6.0 _/\_
+
+        final String[] LOCATION_PERMS=
+                {
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION
+                };
+        final int INITIAL_REQUEST=111;
+        requestPermissions(LOCATION_PERMS,INITIAL_REQUEST);
+        // Asking for permissions end
+
+        // Checking if we have necessary permissions for Location Update
+        if (locationManager != null)
+        {
+            if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                    || ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+            {
+                // Register the listener with the Location Manager to receive location updates
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+            }
+        }
+        // End of Checking permissions
+
+    }
+
+
 }
