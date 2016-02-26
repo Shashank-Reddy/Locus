@@ -126,26 +126,31 @@ public class Drawer_Activity extends AppCompatActivity
         }
     }
 
-//    public void sendToServer(View view)
-//    {
-//        EditText getDistance = (EditText) findViewById(R.id.enterDistance);
-//       // String fDistance=getDistance.getText().toString();
-//        int fDistance=Integer.parseInt(getDistance.getText().toString());
-//
-//        EditText getBudget = (EditText) findViewById(R.id.enterBudget);
+    public void sendToServer(View view)
+    {
+        EditText getDistance = (EditText) findViewById(R.id.eDistance); //eNTERED distance
+        String fDistance=getDistance.getText().toString();
+
+//        int fDistance=Integer.parseInt(getBudget.getText().toString());
+
+
+        EditText getBudget = (EditText) findViewById(R.id.eBudget);
+        String fBudget=getBudget.getText().toString();
+
 //        int fBudget=Integer.parseInt(getBudget.getText().toString());
-//
-//        EditText getHeadCount = (EditText) findViewById(R.id.enterHeadCount);
+
+        EditText getHeadCount = (EditText) findViewById(R.id.eHeadCount);
+        String fHeadCount=getHeadCount.getText().toString();
+
 //        int fHeadCount=Integer.parseInt(getHeadCount.getText().toString());
-//
-//        Toast toast = Toast.makeText(getApplicationContext(),
-//                getString(fDistance),
-//                Toast.LENGTH_LONG);
-//        toast.setGravity(Gravity.BOTTOM, 0, 10);
-//        toast.show();
-//
-//        Intent i = new Intent(getApplicationContext(),Drawer_Activity.class);
-//        startActivity(i);
-//    }
+
+        Toast toast = Toast.makeText(getApplicationContext(),
+                fDistance+"|"+fBudget+"|"+fHeadCount,
+                Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.BOTTOM, 0, 10);
+        toast.show();
+
+
+    }
 
 }

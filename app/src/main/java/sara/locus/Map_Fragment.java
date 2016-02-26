@@ -129,6 +129,8 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
            //Control is returned to this point successfully
         }
 
+
+
     }
 
     @Override
