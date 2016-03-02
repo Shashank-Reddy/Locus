@@ -3,10 +3,12 @@ package sara.locus;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -23,12 +25,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.squareup.picasso.Picasso;
 
 
 public class Drawer_Activity extends AppCompatActivity
 {
-
+    Map_Fragment mf=new Map_Fragment(); //create the fragment instance for the map fragment
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,10 +60,9 @@ public class Drawer_Activity extends AppCompatActivity
         EmailTextView.setText(email);
 
         // Calling map_fragment from main(Drawer) activity
-        Map_Fragment mf=new Map_Fragment(); //create the fragment instance for the map fragment
         FragmentManager manager=getSupportFragmentManager();//create an instance of fragment manager
         FragmentTransaction transaction=manager.beginTransaction();//create an instance of Fragment-transaction
-        transaction.add(R.id.map,mf, "Map_Fragment");
+        transaction.add(R.id.map, mf, "Map_Fragment");
         transaction.commit();
         //
 
@@ -143,14 +145,19 @@ public class Drawer_Activity extends AppCompatActivity
         String fHeadCount=getHeadCount.getText().toString();
 
 //        int fHeadCount=Integer.parseInt(getHeadCount.getText().toString());
+        Location mLocation=mf.mLocation;
+        LatLng mLatLng=new LatLng(mLocation.getLatitude(),mLocation.getLongitude()); //Eureka, it's working finally
+
 
         Toast toast = Toast.makeText(getApplicationContext(),
-                fDistance+"|"+fBudget+"|"+fHeadCount,
+                fDistance+"|"+fBudget+"|"+fHeadCount+"|"+mLatLng,
                 Toast.LENGTH_LONG);
         toast.setGravity(Gravity.BOTTOM, 0, 10);
         toast.show();
 
 
     }
+
+
 
 }

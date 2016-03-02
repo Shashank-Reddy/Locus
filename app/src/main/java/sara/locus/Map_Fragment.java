@@ -52,6 +52,7 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
     }
     private GoogleApiClient mGoogleApiClient;
     private Location mCurrentLocation;
+    Location mLocation;
     private final int[] MAP_TYPES = { GoogleMap.MAP_TYPE_SATELLITE,
             GoogleMap.MAP_TYPE_NORMAL,
             GoogleMap.MAP_TYPE_HYBRID,
@@ -112,10 +113,11 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
 
         mCurrentLocation = LocationServices
                 .FusedLocationApi
-                .getLastLocation( mGoogleApiClient ); //mCurrentLocation returning null
+                .getLastLocation( mGoogleApiClient ); //mCurrentLocation returning null in the begining
         if(mCurrentLocation!=null)
         {
             initCamera(mCurrentLocation);
+            mLocation=mCurrentLocation;
         }
         else
         {
@@ -240,6 +242,5 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
         // End of Checking permissions
 
     }
-
 
 }
