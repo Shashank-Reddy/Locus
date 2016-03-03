@@ -28,10 +28,15 @@ import android.widget.Toast;
 import com.google.android.gms.maps.model.LatLng;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Drawer_Activity extends AppCompatActivity
 {
     Map_Fragment mf=new Map_Fragment(); //create the fragment instance for the map fragment
+
+    List<LatLng> coords=new ArrayList<LatLng>(); //Used to store set of LatLngs received from server
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -154,10 +159,26 @@ public class Drawer_Activity extends AppCompatActivity
                 Toast.LENGTH_LONG);
         toast.setGravity(Gravity.BOTTOM, 0, 10);
         toast.show();
+        //Control should go to the server from this point
+        fromSrever(); //Control should return from server to the Activity at this point
+        mf.displayMarkers();//This is used to display the markers based on LatLngs
 
 
     }
 
+    public void fromSrever()
+    {
+        double Latitude[]={17.400384,17.400579}; //Get this from server
+        double Longitude[]={78.489498,78.488653};//Get this from server (Test ke vaasthe KC,Agrawala)
+
+        //If we are using Json, we have to get set of LatLngs extracted from Json and push them into the List locally.
+
+        for (int i = 0 ; i < Latitude.length; i++)
+                    {
+                coords.add(new LatLng(Latitude[i], Longitude[i])); //adding items to LatLng List
+                    }
+
+    }
 
 
 }

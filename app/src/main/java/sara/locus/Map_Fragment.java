@@ -25,6 +25,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.security.Permission;
 import java.security.Permissions;
@@ -44,20 +45,19 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
         GoogleMap.OnInfoWindowClickListener,
         GoogleMap.OnMapLongClickListener,
         GoogleMap.OnMapClickListener,
-        GoogleMap.OnMarkerClickListener,LocationSource.OnLocationChangedListener
-{
-    public Map_Fragment()
-    {
+        GoogleMap.OnMarkerClickListener,LocationSource.OnLocationChangedListener {
+    public Map_Fragment() {
         //constructor
     }
+
     private GoogleApiClient mGoogleApiClient;
     private Location mCurrentLocation;
     Location mLocation;
-    private final int[] MAP_TYPES = { GoogleMap.MAP_TYPE_SATELLITE,
+    private final int[] MAP_TYPES = {GoogleMap.MAP_TYPE_SATELLITE,
             GoogleMap.MAP_TYPE_NORMAL,
             GoogleMap.MAP_TYPE_HYBRID,
             GoogleMap.MAP_TYPE_TERRAIN,
-            GoogleMap.MAP_TYPE_NONE };
+            GoogleMap.MAP_TYPE_NONE};
     private int curMapTypeIndex = 1;
 
     /*
@@ -73,11 +73,11 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
         super.onViewCreated(view, savedInstanceState);
 
         setHasOptionsMenu(true);
-    // Creation of mGoogleApiClient initiates Location services
-        mGoogleApiClient = new GoogleApiClient.Builder( getActivity() )
-                .addConnectionCallbacks( this )
-                .addOnConnectionFailedListener( this )
-                .addApi( LocationServices.API )
+        // Creation of mGoogleApiClient initiates Location services
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
                 .build();
         initListeners();
     }
@@ -102,7 +102,7 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
     @Override
     public void onStop() {
         super.onStop();
-        if( mGoogleApiClient != null && mGoogleApiClient.isConnected() ) {
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             mGoogleApiClient.disconnect();
         }
     }
@@ -113,14 +113,11 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
 
         mCurrentLocation = LocationServices
                 .FusedLocationApi
-                .getLastLocation( mGoogleApiClient ); //mCurrentLocation returning null in the begining
-        if(mCurrentLocation!=null)
-        {
+                .getLastLocation(mGoogleApiClient); //mCurrentLocation returning null in the begining
+        if (mCurrentLocation != null) {
             initCamera(mCurrentLocation);
-            mLocation=mCurrentLocation;
-        }
-        else
-        {
+            mLocation = mCurrentLocation;
+        } else {
             //handle by requesting the users location from GPS client
             Toast toast = Toast.makeText(getContext(),
                     "Accessing GPS location",
@@ -128,9 +125,8 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
             toast.setGravity(Gravity.BOTTOM, 0, 10);
             toast.show();
             location_alternate();
-           //Control is returned to this point successfully
+            //Control is returned to this point successfully
         }
-
 
 
     }
@@ -145,10 +141,6 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
 
     }
 
-    @Override
-    public void onInfoWindowClick(Marker marker) {
-
-    }
 
     @Override
     public void onMapClick(LatLng latLng) {
@@ -166,26 +158,44 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
     }
 
     @Override
+    public void onInfoWindowClick(Marker marker) {
+
+    }
+
+    public void displayMarkers() {
+        Drawer_Activity da = (Drawer_Activity) getActivity(); //Creating an Instance of Drawer Activity to use it's public functions and Global Variables
+
+        for (int i = 0; i < da.coords.size(); i++)
+        {
+            //NOTE: coords wont be NULL as we are populating it by calling fromServer() before calling displayMarkers()
+            final LatLng position = new LatLng(da.coords.get(i).latitude, da.coords.get(i).longitude);
+            final MarkerOptions options = new MarkerOptions().position(position);
+
+            getMap().addMarker(options);
+        }
+    }
+
+    @Override
     public void onLocationChanged(final Location location) {
         //mCurrentLocation = location; //This ain't helping to update the mCurrentLocation
     }
 
-   //Method used in onConnected
-    private void initCamera( Location location ) {
+    //Method used in onConnected
+    private void initCamera(Location location) {
         CameraPosition position = CameraPosition.builder()
-                .target( new LatLng( location.getLatitude(),
-                        location.getLongitude() ) )
-                .zoom( 16f )
-                .bearing( 0.0f )
-                .tilt( 0.0f )
+                .target(new LatLng(location.getLatitude(),
+                        location.getLongitude()))
+                .zoom(16f)
+                .bearing(0.0f)
+                .tilt(0.0f)
                 .build();
 
-        getMap().animateCamera( CameraUpdateFactory
-                .newCameraPosition( position ), null );
+        getMap().animateCamera(CameraUpdateFactory
+                .newCameraPosition(position), null);
 
-        getMap().setMapType( MAP_TYPES[curMapTypeIndex] );
-        getMap().setTrafficEnabled( true );
-        getMap().setMyLocationEnabled( true );
+        getMap().setMapType(MAP_TYPES[curMapTypeIndex]);
+        getMap().setTrafficEnabled(true);
+        getMap().setMyLocationEnabled(true);
         getMap().getUiSettings().setZoomControlsEnabled(true);
         /*
         There's a few more interesting things that you can set using UiSettings,
@@ -195,24 +205,25 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
     }
 
     //
-    public void location_alternate()
-    {
+    public void location_alternate() {
         // Acquire a reference to the system Location Manager
         LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
 
         // Define a listener that responds to location updates
-        LocationListener locationListener = new LocationListener()
-        {
+        LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
-               // mCurrentLocation=location; //This ain't helping to update the mCurrentLocation
+                // mCurrentLocation=location; //This ain't helping to update the mCurrentLocation
             }
 
-            public void onStatusChanged(String provider, int status, Bundle extras) {}
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+            }
 
-            public void onProviderEnabled(String provider) {}
+            public void onProviderEnabled(String provider) {
+            }
 
-            public void onProviderDisabled(String provider) {}
+            public void onProviderDisabled(String provider) {
+            }
         };
 
         //end of listener
@@ -220,21 +231,19 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
 
         // Asking for location permissions at Run Time, because Android 6.0 _/\_
 
-        final String[] LOCATION_PERMS=
+        final String[] LOCATION_PERMS =
                 {
                         Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.ACCESS_COARSE_LOCATION
                 };
-        final int INITIAL_REQUEST=111;
-        requestPermissions(LOCATION_PERMS,INITIAL_REQUEST);
+        final int INITIAL_REQUEST = 111;
+        requestPermissions(LOCATION_PERMS, INITIAL_REQUEST);
         // Asking for permissions end
 
         // Checking if we have necessary permissions for Location Update
-        if (locationManager != null)
-        {
+        if (locationManager != null) {
             if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                    || ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-            {
+                    || ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 // Register the listener with the Location Manager to receive location updates
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
             }
@@ -242,5 +251,6 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
         // End of Checking permissions
 
     }
+
 
 }
