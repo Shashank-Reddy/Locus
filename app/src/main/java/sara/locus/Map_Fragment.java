@@ -2,6 +2,7 @@ package sara.locus;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -153,13 +154,16 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
     }
 
     @Override
-    public boolean onMarkerClick(Marker marker) {
-        return false;
+    public boolean onMarkerClick(Marker marker)
+    {
+        return false;//if false an info window appears
     }
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-
+        Intent i = new Intent(getContext(),locationDetails.class);
+        i.putExtra("caller", "Map_Fragment");
+        startActivity(i);
     }
 
     public void displayMarkers() {
@@ -169,7 +173,7 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
         {
             //NOTE: coords wont be NULL as we are populating it by calling fromServer() before calling displayMarkers()
             final LatLng position = new LatLng(da.coords.get(i).latitude, da.coords.get(i).longitude);
-            final MarkerOptions options = new MarkerOptions().position(position);
+            final MarkerOptions options = new MarkerOptions().position(position).title("King&Cardinal").snippet("Rating: 4/5");
 
             getMap().addMarker(options);
         }

@@ -18,4 +18,18 @@
     <string name="Distance">Distance</string>
     <string name="Budget">Budget</string>
     <string name="Head_Count">Head count</string>
+    <string name="title_activity_location_details">King and Cardinal</string>
+    <string name="large_text">
+        "Review:\n\n""It is a complete bakery I must say. They have lots of varieties on the menu."
+        "A var variety of chicken items, burgers, pizzas, cakes, etc. It is a hangout place which is "
+        "usually crowded by the students from near by colleges. One of the places at Himayathnagar where"
+        "you can satisfy your hunger at cheap rates. No need to worry about the quality. The best thing is"
+        "they serve onion slices with your order. "
+        "The bakery is located at the Himayathnagar circle at signal. The ambience is not so bad with decent look and "
+        "comfortable seatings. The service is pretty quick and staff is super friendly. Parking is available for both two wheelers"
+        "and four wheelers at down the cellar."
+
+        "Overall, it is one of the oldest and famous bakery in the area and it's charm is still present even as the competition "
+        "has increased in the area with the opening of fast food giants."
+    </string>
 </resources>
