@@ -7,13 +7,55 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="sara.locus.locationDetails"
-    tools:showIn="@layout/activity_location_details"
-    >
+    tools:showIn="@layout/activity_location_details">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+    <TableLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:paddingTop="30dp">
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Address"
+                android:textSize="20dp"
+                android:padding="3dp">
 
+            </TextView>
+        </TableRow>
+        <TableRow android:layout_height="1dp" android:background="#BDBDBD">
+            <TextView android:layout_span="2" android:layout_height="1dp"
+            android:layout_width="fill_parent" android:text="">
+        </TextView>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="16dp"
+                android:padding="3dp"
+                android:id="@+id/webAddress"
+                android:autoLink="web"/>
+        </TableRow>
+        <TableRow android:layout_height="1dp" android:background="#BDBDBD">
+            <TextView android:layout_span="2" android:layout_height="1dp"
+                android:layout_width="fill_parent" android:text="">
+            </TextView>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="25dp"
+                android:textAllCaps="true"
+                android:gravity="center"
+                android:padding="3dp"
+                android:id="@+id/isOpen"/>
+        </TableRow>
+        <TableRow android:layout_height="2dp" android:background="#BDBDBD">
+            <TextView android:layout_span="2" android:layout_height="2dp"
+                android:layout_width="fill_parent" android:text="">
+            </TextView>
+        </TableRow>
+    </TableLayout>
 </android.support.v4.widget.NestedScrollView>

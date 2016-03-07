@@ -175,9 +175,10 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
         {
             //NOTE: coords wont be NULL as we are populating it by calling fromServer() before calling displayMarkers()
             final LatLng position = new LatLng(da.coords.get(i).latitude, da.coords.get(i).longitude);
-            final MarkerOptions options = new MarkerOptions().position(position).title(da.rNames.get(i)).snippet("Rating:"+da.rRatings.get(i)+"/5\n"+"Rid-"+da.rId.get(i));
+            final MarkerOptions options = new MarkerOptions().position(position).title(da.rNames.get(i)).snippet("Rating:" + da.rRatings.get(i) + "/5\n" + "Rid-" + da.rId.get(i));
 
             getMap().addMarker(options);
+
         }
 
 

@@ -22,11 +22,11 @@
         android:text="@string/Distance"
         android:id="@+id/Distance"
         android:textColor="#ffffff"
-        android:layout_marginTop="30dp"
         android:padding="8dp"
         android:layout_below="@+id/map"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="39dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -39,8 +39,7 @@
 
         android:layout_below="@+id/Distance"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -52,8 +51,7 @@
         android:padding="8dp"
         android:layout_below="@+id/Budget"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -61,9 +59,8 @@
         android:text="Apply Filters"
         android:id="@+id/filter_Button"
         android:onClick="sendToServer"
-        android:layout_above="@+id/Head_Count"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/eHeadCount"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -72,9 +69,8 @@
         android:ems="10"
         android:id="@+id/eDistance"
         android:layout_alignBottom="@+id/Distance"
-        android:layout_toRightOf="@+id/Head_Count"
-        android:layout_toLeftOf="@+id/filter_Button"
-        android:layout_toStartOf="@+id/filter_Button" />
+        android:layout_alignLeft="@+id/eBudget"
+        android:layout_alignStart="@+id/eBudget" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -83,9 +79,8 @@
         android:ems="10"
         android:id="@+id/eBudget"
         android:layout_alignTop="@+id/Budget"
-        android:layout_toLeftOf="@+id/filter_Button"
-        android:layout_alignLeft="@+id/eDistance"
-        android:layout_alignStart="@+id/eDistance" />
+        android:layout_alignLeft="@+id/filter_Button"
+        android:layout_alignStart="@+id/filter_Button" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -94,9 +89,8 @@
         android:ems="10"
         android:id="@+id/eHeadCount"
         android:layout_alignTop="@+id/Head_Count"
-        android:layout_toLeftOf="@+id/filter_Button"
-        android:layout_toRightOf="@+id/Head_Count"
-        android:layout_toEndOf="@+id/Head_Count" />
+        android:layout_alignLeft="@+id/eBudget"
+        android:layout_alignStart="@+id/eBudget" />
 
 
 </RelativeLayout>
