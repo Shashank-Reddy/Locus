@@ -162,21 +162,25 @@ public class Map_Fragment extends SupportMapFragment implements GoogleApiClient.
     @Override
     public void onInfoWindowClick(Marker marker) {
         Intent i = new Intent(getContext(),locationDetails.class);
-        i.putExtra("caller", "Map_Fragment");
+        i.putExtra("rName", marker.getTitle());
+        i.putExtra("rId",marker.getSnippet());
         startActivity(i);
     }
 
     public void displayMarkers() {
+        getMap().clear();
         Drawer_Activity da = (Drawer_Activity) getActivity(); //Creating an Instance of Drawer Activity to use it's public functions and Global Variables
 
         for (int i = 0; i < da.coords.size(); i++)
         {
             //NOTE: coords wont be NULL as we are populating it by calling fromServer() before calling displayMarkers()
             final LatLng position = new LatLng(da.coords.get(i).latitude, da.coords.get(i).longitude);
-            final MarkerOptions options = new MarkerOptions().position(position).title("King&Cardinal").snippet("Rating: 4/5");
+            final MarkerOptions options = new MarkerOptions().position(position).title(da.rNames.get(i)).snippet("Rating:"+da.rRatings.get(i)+"/5\n"+"Rid-"+da.rId.get(i));
 
             getMap().addMarker(options);
         }
+
+
     }
 
     @Override

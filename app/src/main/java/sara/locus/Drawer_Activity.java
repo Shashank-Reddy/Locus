@@ -40,6 +40,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
 
+import java.io.LineNumberInputStream;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
@@ -53,7 +54,11 @@ public class Drawer_Activity extends AppCompatActivity
 {
     Map_Fragment mf=new Map_Fragment(); //create the fragment instance for the map fragment
 
-    List<LatLng> coords=new ArrayList<LatLng>(); //Used to store set of LatLngs received from server
+    List<LatLng> coords=new ArrayList<LatLng>();//Used to store set of LatLngs received from server
+    List<String> rNames=new ArrayList<String>();//Used to store set of Restraunt names received from serve
+    List<String> rRatings=new ArrayList<String>();//Used to store set of Restraunt rating received from serve
+    List<String> rId=new ArrayList<String>();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -152,6 +157,7 @@ public class Drawer_Activity extends AppCompatActivity
 
     public void sendToServer(View view)
     {
+
         EditText getDistance = (EditText) findViewById(R.id.eDistance); //eNTERED distance
         String fDistance=getDistance.getText().toString();
 
@@ -181,10 +187,13 @@ public class Drawer_Activity extends AppCompatActivity
         toast.setGravity(Gravity.BOTTOM, 0, 10);
         toast.show();
         //Control should go to the server from this point
-        fromServer(fDistance, fBudget, fHeadCount, mLat, mLng); //Control should return from server to the Activity at this point
-        geoCodeToServer(mLat,mLng); //API waale LAtLngs
+       // fromServer(fDistance, fBudget, fHeadCount, mLat, mLng); //Control should return from server to the Activity at this point
+        fromAzure(mLat, mLng, fDistance); //API waale LAtLngs
         mf.displayMarkers();//This is used to display the markers based on myLatLngs
-
+        coords.clear();
+        rNames.clear();
+        rRatings.clear();
+        rId.clear();
 
     }
 
@@ -203,13 +212,14 @@ public class Drawer_Activity extends AppCompatActivity
 
     }
 
-    public void geoCodeToServer(final double mLat, final double mLng) {
+    public void fromAzure(final double mLat, final double mLng, final String fDistance) {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://locus.arjun.ninja/api/geocode";
         final String sLat=Double.toString(mLat);
         final String sLng=Double.toString(mLng);
         final String Latitude[]=new String[100];
         final String Longitude[]=new String[100];
+
 
         StringRequest postRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>()
@@ -223,6 +233,9 @@ public class Drawer_Activity extends AppCompatActivity
                             //Get the instance of JSONArray that contains JSONObjects
                             JSONArray jsonLatArray = jsonRootObject.getJSONArray("lats");
                             JSONArray jsonLangArray=jsonRootObject.getJSONArray("lngs");
+                            JSONArray jsonNameArray=jsonRootObject.getJSONArray("names");
+                            JSONArray jsonRatingArray=jsonRootObject.getJSONArray("ratings");
+                            JSONArray jsonIdArray=jsonRootObject.getJSONArray("codes");
 
                             double length=jsonLatArray.length();
                             String len=Double.toString(length);
@@ -237,9 +250,13 @@ public class Drawer_Activity extends AppCompatActivity
                                 double dLatitude=Double.parseDouble(Latitude[i]);
 //                                JSONObject jsonLngObject = jsonLangArray.getJSONObject(i);
 //                                Longitude[i]=jsonLngObject.toString();
-                                Longitude[i]=jsonLangArray.getString(i);
+                                Longitude[i]=jsonLangArray.optString(i);
                                 double dLongitude=Double.parseDouble(Longitude[i]);
                                 coords.add(new LatLng(dLatitude, dLongitude));
+                                rNames.add(jsonNameArray.optString(i));
+                                rRatings.add(jsonRatingArray.optString(i));
+                                rId.add(jsonIdArray.optString(i));
+
                             }
 
                         }
@@ -260,6 +277,7 @@ public class Drawer_Activity extends AppCompatActivity
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("lat",sLat);
                 params.put("lng",sLng);
+                params.put("radius",fDistance);
 
                 return params;
             }
