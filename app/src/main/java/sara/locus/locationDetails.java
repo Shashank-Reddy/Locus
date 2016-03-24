@@ -41,7 +41,7 @@ public class locationDetails extends AppCompatActivity {
     String rId;
     String Phone;
     String Address;
-    String isOpen;
+    String isPlaceOpen;
     String webAddress;
 
     @Override
@@ -117,7 +117,7 @@ public class locationDetails extends AppCompatActivity {
                             Address=jsonRootObject.optString("address");
                             Phone=jsonRootObject.optString("phone_number");
                             webAddress=jsonRootObject.optString("website");
-                            isOpen=jsonRootObject.optString("open_now");
+                            isPlaceOpen=jsonRootObject.optString("open_now");
                             TextView location_details=(TextView)findViewById(R.id.Address);
                             location_details.setText(Address);
 
@@ -128,7 +128,7 @@ public class locationDetails extends AppCompatActivity {
                             web_Address.setText(Html.fromHtml(webAddress));
 
                             TextView isOpen=(TextView)findViewById(R.id.isOpen);
-                            if(isOpen.getText().equals("true")) {
+                            if(isPlaceOpen.equals("true")) {
                                 isOpen.setText("Open");
                                 isOpen.setTextColor(Color.parseColor("#33cc33"));
                             }
