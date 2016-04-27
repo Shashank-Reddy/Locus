@@ -74,9 +74,9 @@ public class locationDetails extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final int INITIAL_REQUEST = 111;
-                final String LOCATION_PERMS[]={Manifest.permission.CALL_PHONE};
-                requestPermissions(LOCATION_PERMS, INITIAL_REQUEST); //Works only with API23
+                //final int INITIAL_REQUEST = 111;
+                //final String LOCATION_PERMS[]={Manifest.permission.CALL_PHONE};
+                //requestPermissions(LOCATION_PERMS, INITIAL_REQUEST); //Works only with API23
 
                 if(Phone.contentEquals("null")) {
                     Snackbar.make(view, "Phone number not Available", Snackbar.LENGTH_LONG)
@@ -122,7 +122,10 @@ public class locationDetails extends AppCompatActivity {
                             location_details.setText(Address);
 
                             TextView web_Address=(TextView)findViewById(R.id.webAddress);
-                            web_Address.setText(webAddress);
+                            if(webAddress==null)
+                                web_Address.setText("Website not available");
+                            else
+                                web_Address.setText(webAddress);
                             web_Address.setClickable(true);
                             web_Address.setMovementMethod(LinkMovementMethod.getInstance());
                             web_Address.setText(Html.fromHtml(webAddress));

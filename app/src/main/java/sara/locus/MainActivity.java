@@ -1,5 +1,4 @@
 package sara.locus;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +10,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         SharedPreferences sharedPreferences = getSharedPreferences("MyPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         if (sharedPreferences.contains("isLoggedIn")) {
@@ -26,4 +26,5 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
         finish();
     }
+
 }

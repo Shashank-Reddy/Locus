@@ -16,8 +16,8 @@
     <string name="title_activity_maps">Locus</string>
     <string name="Tag_Line">Locate. Curate. Suggest.</string>
     <string name="Distance">Distance</string>
-    <string name="Budget">Budget</string>
-    <string name="Head_Count">Head count</string>
+    <string name="Budget">Budget*</string>
+    <string name="Head_Count">Head count*</string>
     <string name="title_activity_location_details">Name</string>
     <string name="large_text">
         "Review:\n\n""It is a complete bakery I must say. They have lots of varieties on the menu."

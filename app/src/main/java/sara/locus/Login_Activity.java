@@ -1,9 +1,12 @@
 package sara.locus;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +41,13 @@ public class Login_Activity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_);
+
+        //Check GPS
+        final LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+
+        if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+            buildAlertMessageNoGps();
+        }
 
         // Google sign in button code
         findViewById(R.id.sign_in_button).setOnClickListener(this); // if we set like this, we can work on code in onClick()
@@ -173,5 +183,23 @@ public class Login_Activity extends AppCompatActivity implements
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
+    }
+
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 }

@@ -26,8 +26,7 @@
             <android.support.v7.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/branded_logo"
-                android:id="@+id/location_image" />
+                />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
